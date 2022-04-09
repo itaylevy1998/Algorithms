@@ -1,18 +1,16 @@
 #pragma once
-
-class Edge {
-private:
-	int vertex;
-	int weight;
-	Edge* next;
-public:
-	Edge(int vertex ,int weight, Edge* next);
-	~Edge();
-	
-
-};
+#include "Edge.h"
 
 class List {
+private:
 	Edge* head;
 	Edge* tail;
+	int size;
+public:
+	List();
+	~List();
+	bool isEmpty();
+	void insertToEnd(int vertex, int weight);
+	void insertToStart(int vertex, int weight);
+	void removeEdge(Edge* toRemove);
 };

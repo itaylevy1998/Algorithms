@@ -13,6 +13,7 @@ public:
 	bool isTail();
 	Edge* getNext();
 	Edge* getPrev();
+	int getVertex();
 	void setNext(Edge* next);
 	void setPrev(Edge* prev);
 };

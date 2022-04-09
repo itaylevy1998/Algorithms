@@ -1,8 +1,10 @@
-#include "List.h"
+#include "Graph.h"
+#include <vector>
+#include <iostream>
+using namespace std;
+
 void main(int argc, char* argv[]){
-	List lst;
-	lst.insertToEnd(2, 5);
-	lst.insertToEnd(3, 7);
-	lst.insertToEnd(4, 5);
-	lst.insertToEnd(5, 5);
+	Graph newGraph;
+	newGraph.MakeEmptyGraph(5);
+	newGraph.AddEdge(1, 2, 10);
 }

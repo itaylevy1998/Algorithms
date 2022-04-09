@@ -32,6 +32,11 @@ Edge* Edge::getPrev()
 	return prev;
 }
 
+int Edge::getVertex()
+{
+	return vertex;
+}
+
 void Edge::setNext(Edge* next)
 {
 	this->next = next;

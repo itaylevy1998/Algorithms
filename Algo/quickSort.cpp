@@ -1,22 +1,22 @@
 #pragma once
 #include "quickSort.h"
 
-void swap(int* x, int* y)
+void swap(Edge* x, Edge* y)
 {
-    int temp = *x;
+    Edge temp = *x;
     *x = *y;
     *y = temp;
 }
 
-int partition(vector<int>& arr, int left, int right)
+int partition(vector<Edge>& arr, int left, int right)
 {
-    int x = arr[right];
+    Edge x = arr[right];
     int i = left - 1;
     int j = left;
 
     while (j <= right - 1)
     {
-        if (arr[j] <= x)
+        if (arr[j].getWeight() <= x.getWeight())
         {
             i += 1;
             swap(&arr[i], &arr[j]);
@@ -28,7 +28,7 @@ int partition(vector<int>& arr, int left, int right)
     return i + 1;
 }
 
-void quickSort(vector<int>& arr, int left, int right)
+void quickSort(vector<Edge>& arr, int left, int right)
 {
     int pivot;
 

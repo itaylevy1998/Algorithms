@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 using namespace std;
 
 struct Pair {
@@ -10,18 +11,16 @@ struct Pair {
 class PriorityQueue
 {
 public:
-	PriorityQueue(int max = 0);
+	PriorityQueue();
 	~PriorityQueue();
 
-	void Build(int* V, int* min);
-	Pair* DeleteMin();
+	void Build(int max, vector<int>& min);
+	Pair DeleteMin();
 	bool IsEmpty();
 	void DecreaseKey(int place, int newKey);
 
 private:
-	int maxSize, allocated, heapSize;
-	Pair** heap;
-
+	vector<Pair> heap;
 	int Parent(int pair);
 	int Left(int pair);
 	int Right(int pair);

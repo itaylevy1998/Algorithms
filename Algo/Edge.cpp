@@ -33,9 +33,19 @@ Edge* Edge::getPrev()
 	return prev;
 }
 
-int Edge::getVertex()
+int Edge::getV()
 {
 	return v;
+}
+
+int Edge::getU()
+{
+	return u;
+}
+
+int Edge::getWeight()
+{
+	return weight;
 }
 
 void Edge::setNext(Edge* next)

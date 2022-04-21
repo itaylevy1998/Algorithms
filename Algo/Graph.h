@@ -15,4 +15,6 @@ public:
 	void AddEdge(int u, int v, int c);
 	void RemoveEdge(int u, int v);
 	int getGraphSize();
+	vector<Edge>& getListOfEdges();
+	int getNumOfEdges();
 };

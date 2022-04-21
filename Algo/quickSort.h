@@ -1,11 +1,10 @@
 #pragma once
-#indlude "Edge"
-
 #include <iostream>
 using namespace std;
 #include <vector>
+#include "Edge.h"
 
-void swap(int* x, int* y);
-int partition(vector<int>& arr, int left, int right);
-void quickSort(vector<int>& arr, int left, int right);
+void swap(Edge* x, Edge* y);
+int partition(vector<Edge>& arr, int left, int right);
+void quickSort(vector<Edge>& arr, int left, int right);
 

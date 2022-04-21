@@ -1,39 +1,29 @@
 #include "PriorityQueue.h"
 
 // constructor
-PriorityQueue::PriorityQueue(int max) : heap(nullptr), maxSize(max), allocated(0), heapSize(0)
-{
-	heap = new Pair * [maxSize];
-	allocated = 1;
-}
+PriorityQueue::PriorityQueue() { }
 
 //destructor
 PriorityQueue::~PriorityQueue()
 {
-	for (int i = 0; i < heapSize; i++)
-		delete heap[i];
-
-	if (allocated)
-		delete[] heap;
-
-	heap = nullptr;
+	heap.clear();
 }
 
 // build heap using floyd algorithm - currently not workink
-void PriorityQueue::Build(int* V, int* min)
+void PriorityQueue::Build(int max, vector<int>& min)
 {
 	int i;
-	for (i = 0; i < maxSize; ++i)
+	for (i = 1; i <= max; ++i)
 	{
-		Pair* tmp = new Pair;
-		tmp->data = V[i];
-		tmp->key = min[i];
-		heap[i] = tmp;
+		Pair tmp;
+		tmp.data = i;
+		tmp.key = min[i-1];
+		heap.push_back(tmp);
 	}
 
-	heapSize = maxSize;
+	int heapSize = heap.size();
 
-	for (i = maxSize / 2 - 1; i >= 0; i--)
+	for (i = heapSize / 2 - 1; i >= 0; i--)
 		FixHeapDown(i);
 
 }
@@ -41,7 +31,7 @@ void PriorityQueue::Build(int* V, int* min)
 // return true if the queue is empty
 bool PriorityQueue::IsEmpty() 
 {
-	if (heapSize == 0)
+	if (heap.size() == 0)
 		return true;
 	else
 		return false;
@@ -51,7 +41,7 @@ bool PriorityQueue::IsEmpty()
 // decrese key of given pair
 void PriorityQueue::DecreaseKey(int place, int newKey)
 {
-	(*heap[place]).key = newKey;
+	heap[place].key = newKey;
 	FixHeapUp(place);
 }
 
@@ -75,20 +65,22 @@ int PriorityQueue::Right(int pair)
 }
 
 // delete the pair with the minimum priority and returns it
-Pair* PriorityQueue::DeleteMin()
+Pair PriorityQueue::DeleteMin()
 {
-	if (heapSize < 1)
-	{
-		return nullptr;
-	}
-	else
-	{
-		Pair* min = heap[0];
-		heapSize--;
-		heap[0] = heap[heapSize];
+	int heapsize = heap.size();
+
+	///* */if (heapsize < 1)
+	//{
+	//	return nullptr;
+	//}
+	
+	
+		Pair min = heap[0];
+		heap[0] = heap[heapsize];
+		heap.resize(heapsize - 1);
 		FixHeapDown(0);
 		return min;
-	}
+	
 }
 
 // Fixheap: if the parent priority is greater than it's child poriority, it'll swap them. It'll stop when we get to the root.
@@ -96,7 +88,7 @@ void PriorityQueue::FixHeapUp(int pair)
 {
 	int parent = Parent(pair);
 
-	if (parent >= 0 && (heap[pair]->key < heap[parent]->key))
+	if (parent >= 0 && (heap[pair].key < heap[parent].key))
 	{
 		Swap(pair, parent);
 		FixHeapUp(parent);
@@ -108,13 +100,14 @@ void PriorityQueue::FixHeapDown(int pair)
 {
 	int min = pair, left = Left(pair);
 	int right = Right(pair);
+	int heapsize = heap.size();
 
-	if (left < heapSize && (heap[left]->key < heap[pair]->key))
+	if (left < heapsize && (heap[left].key < heap[pair].key))
 		min = left;
 	else
 		min = pair;
 
-	if (right < heapSize && (heap[right]->key < heap[min]->key))
+	if (right < heapsize && (heap[right].key < heap[min].key))
 		min = right;
 
 	if (min != pair)
@@ -127,8 +120,7 @@ void PriorityQueue::FixHeapDown(int pair)
 // swap two pairs in the heap
 void PriorityQueue::Swap(int i, int j)
 {
-	Pair* tmp = heap[i];
-	cout << tmp;
+	Pair tmp = heap[i];
 	heap[i] = heap[j];
 	heap[j] = tmp;
 }

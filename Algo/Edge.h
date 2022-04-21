@@ -14,7 +14,9 @@ public:
 	bool isTail();
 	Edge* getNext();
 	Edge* getPrev();
-	int getVertex();
+	int getV();
+	int getU();
+	int getWeight();
 	void setNext(Edge* next);
 	void setPrev(Edge* prev);
 };

@@ -34,8 +34,8 @@ List Graph::GetAdjList(int u)
 void Graph::AddEdge(int u, int v, int c)
 {
 	//create exception message if 'u' or 'v' doesn't exist
-	graph.at(u-1).insertToEnd(v, c);
-	graph.at(v-1).insertToEnd(u, c);
+	graph.at(u-1).insertToEnd(u, v, c);
+	graph.at(v-1).insertToEnd(v, u, c);
 	Edge newEdge(u, v, c, nullptr, nullptr);
 	listOfEdges.push_back(newEdge);
 }
@@ -49,4 +49,14 @@ void Graph::RemoveEdge(int u, int v)
 int Graph::getGraphSize()
 {
 	return graph.size();
+}
+
+vector<Edge>& Graph::getListOfEdges()
+{
+	return listOfEdges;
+}
+
+int Graph::getNumOfEdges()
+{
+	return listOfEdges.size();
 }

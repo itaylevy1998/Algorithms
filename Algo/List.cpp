@@ -23,9 +23,9 @@ bool List::isEmpty()
 	return (head == nullptr);
 }
 
-void List::insertToEnd(int vertex, int weight)
+void List::insertToEnd(int u,int vertex, int weight)
 {
-	Edge* newEdge = new Edge(vertex, weight, nullptr, tail);
+	Edge* newEdge = new Edge(u,vertex, weight, nullptr, tail);
 	if (isEmpty()) 
 		head = tail = newEdge;
 	else
@@ -36,8 +36,8 @@ void List::insertToEnd(int vertex, int weight)
 	size++;
 }
 
-void List::insertToStart(int vertex, int weight) {
-	Edge* newEdge = new Edge(vertex, weight, head, nullptr);
+void List::insertToStart(int u, int vertex, int weight) {
+	Edge* newEdge = new Edge(u, vertex, weight, head, nullptr);
 	if (isEmpty())
 		head = tail = newEdge;
 	else
@@ -76,7 +76,7 @@ bool List::findEdge(int v)
 {
 	Edge* curr = head;
 	while (curr != nullptr) {
-		if (curr->getVertex() == v)
+		if (curr->getV() == v)
 			return true;
 		curr = curr->getNext();
 	}
@@ -87,7 +87,7 @@ void List::findEdgeAndRemoveIt(int v)
 {
 	Edge* curr = head;
 	while (curr != nullptr) {
-		if (curr->getVertex() == v) {
+		if (curr->getV() == v) {
 			removeEdge(curr);
 			return;
 		}

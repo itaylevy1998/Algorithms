@@ -144,6 +144,7 @@
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MST.cpp" />
     <ClCompile Include="PriorityQueue.cpp" />
     <ClCompile Include="quickSort.cpp" />
   </ItemGroup>
@@ -152,6 +153,7 @@
     <ClInclude Include="Edge.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="MST.h" />
     <ClInclude Include="PriorityQueue.h" />
     <ClInclude Include="quickSort.h" />
   </ItemGroup>

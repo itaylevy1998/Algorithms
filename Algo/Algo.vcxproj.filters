@@ -36,6 +36,9 @@
     <ClCompile Include="DisjointSets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MST.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="List.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DisjointSets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MST.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

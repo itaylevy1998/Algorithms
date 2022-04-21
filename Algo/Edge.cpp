@@ -1,8 +1,9 @@
 #include "Edge.h"
 
-Edge::Edge(int vertex, int weight, Edge* next, Edge* prev)
+Edge::Edge(int u, int vertex, int weight, Edge* next, Edge* prev)
 {
-	this->vertex = vertex;
+	this->u = u;
+	this->v = vertex;
 	this->weight = weight;
 	this->next = next;
 	this->prev = prev;
@@ -34,7 +35,7 @@ Edge* Edge::getPrev()
 
 int Edge::getVertex()
 {
-	return vertex;
+	return v;
 }
 
 void Edge::setNext(Edge* next)

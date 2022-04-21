@@ -1,13 +1,14 @@
 #pragma once
-
+// hello
 class Edge {
 private:
-	int vertex;
+	int u;
+	int v;
 	int weight;
 	Edge* next;
 	Edge* prev;
 public:
-	Edge(int vertex, int weight, Edge* next, Edge* prev);
+	Edge(int u, int vertex, int weight, Edge* next, Edge* prev);
 	~Edge();
 	bool isHead();
 	bool isTail();

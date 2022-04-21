@@ -5,7 +5,7 @@ List::List(int vertex)
 	this->head = nullptr;
 	this->tail = nullptr;
 	this->size = 0;
-	this->vertex = vertex;
+	this->v = vertex;
 }
 
 List::~List()

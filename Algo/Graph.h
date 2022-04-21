@@ -5,6 +5,7 @@ using namespace std;
 class Graph {
 private:
 	vector<List> graph;
+	vector<Edge> listOfEdges;
 public:
 	Graph();
 	~Graph();
@@ -13,4 +14,5 @@ public:
 	List GetAdjList(int u);
 	void AddEdge(int u, int v, int c);
 	void RemoveEdge(int u, int v);
+	int getGraphSize();
 };

@@ -6,7 +6,7 @@ private:
 	Edge* head;
 	Edge* tail;
 	int size;
-	int vertex;
+	int v;
 public:
 	List(int vertex);
 	~List();

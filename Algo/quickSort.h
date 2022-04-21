@@ -1,4 +1,6 @@
 #pragma once
+#indlude "Edge"
+
 #include <iostream>
 using namespace std;
 #include <vector>

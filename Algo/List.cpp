@@ -5,7 +5,7 @@ List::List(int vertex)
 	this->head = nullptr;
 	this->tail = nullptr;
 	this->size = 0;
-	this->v = vertex;
+	this->u = vertex;
 }
 
 List::~List()
@@ -16,6 +16,11 @@ List::~List()
 		delete(curr);
 		curr = next;
 	}
+}
+
+Edge* List::getHead()
+{
+	return head;
 }
 
 bool List::isEmpty()

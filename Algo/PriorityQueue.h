@@ -17,10 +17,11 @@ public:
 	void Build(int max, vector<int>& min);
 	Pair DeleteMin();
 	bool IsEmpty();
-	void DecreaseKey(int place, int newKey);
+	void DecreaseKey(int item, int newKey);
 
 private:
 	vector<Pair> heap;
+	vector<int> indices;
 	int Parent(int pair);
 	int Left(int pair);
 	int Right(int pair);

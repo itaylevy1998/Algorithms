@@ -15,7 +15,8 @@ int MST::getWeight()
 	return weight;
 }
 
-void MST::addEdge(Edge& newEdge)
+
+void MST::addEdge(Edge newEdge)
 {
 	listOfEdgesInTree.push_back(newEdge);
 	weight += newEdge.getWeight();

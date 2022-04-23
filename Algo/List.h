@@ -6,10 +6,11 @@ private:
 	Edge* head;
 	Edge* tail;
 	int size;
-	int v;
+	int u;
 public:
 	List(int vertex);
 	~List();
+	Edge* getHead();
 	bool isEmpty();
 	void insertToEnd(int u,int vertex, int weight);
 	void insertToStart(int u, int vertex, int weight);

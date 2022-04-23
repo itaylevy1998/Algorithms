@@ -7,18 +7,21 @@ PriorityQueue::PriorityQueue() { }
 PriorityQueue::~PriorityQueue()
 {
 	heap.clear();
+	indices.clear();
 }
 
 // build heap using floyd algorithm - currently not workink
 void PriorityQueue::Build(int max, vector<int>& min)
 {
 	int i;
+	indices.push_back(-1);
 	for (i = 1; i <= max; ++i)
 	{
 		Pair tmp;
-		tmp.data = i;
-		tmp.key = min[i-1];
+		tmp.data = i ;
+		tmp.key = min[i];
 		heap.push_back(tmp);
+		indices.push_back(i-1);
 	}
 
 	int heapSize = heap.size();
@@ -39,10 +42,11 @@ bool PriorityQueue::IsEmpty()
 
 
 // decrese key of given pair
-void PriorityQueue::DecreaseKey(int place, int newKey)
+void PriorityQueue::DecreaseKey(int item, int newKey)
 {
-	heap[place].key = newKey;
-	FixHeapUp(place);
+	int ind = indices[item];
+	heap[ind].key = newKey;
+	FixHeapUp(ind);
 }
 
 
@@ -76,7 +80,8 @@ Pair PriorityQueue::DeleteMin()
 	
 	
 		Pair min = heap[0];
-		heap[0] = heap[heapsize];
+		heap[0] = heap[heapsize - 1];
+		indices[heap[heapsize - 1].data] = 0;
 		heap.resize(heapsize - 1);
 		FixHeapDown(0);
 		return min;
@@ -123,4 +128,7 @@ void PriorityQueue::Swap(int i, int j)
 	Pair tmp = heap[i];
 	heap[i] = heap[j];
 	heap[j] = tmp;
+	int tmpInd = indices[heap[i].data];
+	indices[heap[i].data] = indices[heap[j].data];
+	indices[heap[j].data] = tmpInd;
 }

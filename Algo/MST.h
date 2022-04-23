@@ -6,10 +6,11 @@ using namespace std;
 class MST {
 private:
 	vector<Edge> listOfEdgesInTree;
-	int weight;
+	int weight = 0;
 public:
 	MST();
 	~MST();
 	int getWeight();
-	void addEdge(Edge& newEdge);
+	void addEdge(Edge newEdge);
+	
 };

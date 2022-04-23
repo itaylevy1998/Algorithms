@@ -9,6 +9,7 @@
 #include "MST.h"
 #include "PriorityQueue.h"
 #include "List.h"
+#include "DFS.h"
 using namespace std;
 //
 #include "Edge.h"
@@ -31,10 +32,10 @@ using namespace std;
 MST Kruskal(Graph& g) {
 	MST F;
 	DisjointSets UF(g.getGraphSize());
-	
+
 	for (int i = 1; i <= g.getGraphSize(); i++)
 		UF.MakeSet(i);
-	
+
 	if (!g.getSorted()) {
 		quickSort(g.getListOfEdges(), 0, g.getNumOfEdges() - 1);
 		g.setSorted();
@@ -43,7 +44,7 @@ MST Kruskal(Graph& g) {
 	for (auto& element : g.getListOfEdges()) {
 		int u1 = UF.Find(element.getU());
 		int v1 = UF.Find(element.getV());
-		if (u1 != v1) 
+		if (u1 != v1)
 		{
 			UF.UnionBySize(u1, v1);
 			F.addEdge(element);
@@ -52,19 +53,19 @@ MST Kruskal(Graph& g) {
 	return F;
 }
 
-MST Prim(Graph &G) {
+MST Prim(Graph& G) {
 	int n = G.getGraphSize();
 	MST T;
 	PriorityQueue Q;
 	vector<bool> InT;
 	vector<int> min;
 	vector<int> p;
-	
+
 	// adding dummy
 	min.push_back(-1);
 	InT.push_back(false);
 	p.push_back(-1);
-	
+
 	min.push_back(0);
 	InT.push_back(false);
 	p.push_back(-1);
@@ -101,10 +102,10 @@ MST Prim(Graph &G) {
 	return T;
 }
 
-void main(int argc, char* argv[]){
+void main(int argc, char* argv[]) {
 	ifstream myfile;
-	myfile.open (argv[1]);
-	
+	myfile.open(argv[1]);
+
 	string line;
 	getline(myfile, line);
 	Graph g;
@@ -112,7 +113,7 @@ void main(int argc, char* argv[]){
 	getline(myfile, line);
 	int m = stoi(line);
 	/*char* edge = nullptr;*/
-	for (int i=0; i<m; ++i)
+	for (int i = 0; i < m; ++i)
 	{
 		//check if there are excatly m edges in file
 		getline(myfile, line);
@@ -130,19 +131,24 @@ void main(int argc, char* argv[]){
 		if (v[0] <1 || v[0] > g.getGraphSize())
 		{
 			cout << "Invalid input!";
-			exit(1);	
+			exit(1);
 		}
 		if (v[1] <1 || v[1] > g.getGraphSize())
 		{
 			cout << "Invalid input!";
-			exit(1);			
+			exit(1);
 		}
 		g.AddEdge(v[0], v[1], v[2]);
 		v.clear();
 	}
 
+	// if g isn't connective - invalid input
+
 	MST tmp1 = Kruskal(g);
+	cout << "Kruskal " << tmp1.getWeight() << endl;
+
 	MST tmp2 = Prim(g);
+	cout << "Prim " << tmp2.getWeight() << endl;
 
 	getline(myfile, line);
 	istringstream iss(line);
@@ -159,19 +165,28 @@ void main(int argc, char* argv[]){
 	if (v[0] <1 || v[0] > g.getGraphSize())
 	{
 		cout << "Invalid input!";
-		exit(1);	
+		exit(1);
 	}
 	if (v[1] <1 || v[1] > g.getGraphSize())
 	{
 		cout << "Invalid input!";
-		exit(1);			
+		exit(1);
 	}
-	myfile.close();
-	g.RemoveEdge(v[0], v[1]);
-	Kruskal(g);
-	
 
-	
+	myfile.close();
+
+	g.RemoveEdge(v[0], v[1]);
+
+	// I noticed that if we remove an edge that doesn't exists in the graph there's no error - we need to throw exception later.
+
+	if (isConnective(g)) {
+		MST tmp3 = Kruskal(g);
+		cout << "Kruskal2 " << tmp3.getWeight() << endl;
+	}
+	else
+		cout << "The given Edge is a bridge. no MST exists" << endl;
+
+
 }
 
 

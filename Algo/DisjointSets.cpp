@@ -32,7 +32,7 @@ int DisjointSets::Find(int v)
 	}
 }
 
-// unite two sets into one sets - not sure about it
+// unite two sets into one sets
 void DisjointSets::UnionBySize(int u, int v) {
 
 	int pu = Find(u);

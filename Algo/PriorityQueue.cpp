@@ -10,7 +10,7 @@ PriorityQueue::~PriorityQueue()
 	indices.clear();
 }
 
-// build heap using floyd algorithm - currently not workink
+// build heap using floyd algorithm
 void PriorityQueue::Build(int max, vector<int>& min)
 {
 	int i;
@@ -41,7 +41,7 @@ bool PriorityQueue::IsEmpty()
 }
 
 
-// decrese key of given pair
+// decrese key of a pair which it's data is item
 void PriorityQueue::DecreaseKey(int item, int newKey)
 {
 	int ind = indices[item];
@@ -114,7 +114,7 @@ void PriorityQueue::FixHeapDown(int pair)
 	}
 }
 
-// swap two pairs in the heap
+// swap two pairs in the heap and update the new pair indices in the indices vector
 void PriorityQueue::Swap(int i, int j)
 {
 	Pair tmp = heap[i];

@@ -4,6 +4,7 @@ int white = 0;
 int grey = 1;
 int black = 2;
 
+// DFS visit function
 void Visit(vector<int>& Color,Graph& g, int u) {
 	Color[u] = grey;
 	Edge* curr = g.GetAdjList(u).getHead();
@@ -17,7 +18,7 @@ void Visit(vector<int>& Color,Graph& g, int u) {
 	Color[u] = black;
 }
 
-
+// return true if the graph is connective, using DFS
 bool isConnective(Graph& g)
 {
 

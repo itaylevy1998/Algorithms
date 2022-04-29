@@ -1,6 +1,7 @@
 #pragma once
 #include "quickSort.h"
 
+// swap two edges
 void swap(Edge* x, Edge* y)
 {
     Edge temp = *x;
@@ -8,6 +9,7 @@ void swap(Edge* x, Edge* y)
     *y = temp;
 }
 
+// partition algorithem
 int partition(vector<Edge>& arr, int left, int right)
 {
     Edge x = arr[right];
@@ -28,6 +30,7 @@ int partition(vector<Edge>& arr, int left, int right)
     return i + 1;
 }
 
+// sort Edges array using quickSort. The sorting will be performed by the weight of the edge.
 void quickSort(vector<Edge>& arr, int left, int right)
 {
     int pivot;

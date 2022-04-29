@@ -39,6 +39,9 @@
     <ClCompile Include="MST.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DFS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="List.h">
@@ -62,5 +65,18 @@
     <ClInclude Include="MST.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DFS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="validInput.txt" />
+    <Text Include="noConnection.txt" />
+    <Text Include="missingWeight.txt" />
+    <Text Include="g3.txt" />
+    <Text Include="g2.txt" />
+    <Text Include="g1.txt" />
+    <Text Include="g4.txt" />
+    <Text Include="badNumberOfVertex.txt" />
   </ItemGroup>
 </Project>

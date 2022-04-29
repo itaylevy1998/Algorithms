@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DFS.cpp" />
     <ClCompile Include="DisjointSets.cpp" />
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="Graph.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="quickSort.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DFS.h" />
     <ClInclude Include="DisjointSets.h" />
     <ClInclude Include="Edge.h" />
     <ClInclude Include="Graph.h" />
@@ -156,6 +158,16 @@
     <ClInclude Include="MST.h" />
     <ClInclude Include="PriorityQueue.h" />
     <ClInclude Include="quickSort.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="badNumberOfVertex.txt" />
+    <Text Include="g1.txt" />
+    <Text Include="g2.txt" />
+    <Text Include="g3.txt" />
+    <Text Include="g4.txt" />
+    <Text Include="missingWeight.txt" />
+    <Text Include="noConnection.txt" />
+    <Text Include="validInput.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

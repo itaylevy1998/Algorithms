@@ -10,25 +10,136 @@
 #include "PriorityQueue.h"
 #include "List.h"
 #include "DFS.h"
-using namespace std;
-//
 #include "Edge.h"
 #include "quickSort.h"
+using namespace std;
 
-//void main() {
-//	vector<Edge> v;
-//	Edge tmp1(1, 3, 2, nullptr, nullptr);
-//	Edge tmp2(2, 5, -3, nullptr, nullptr);
-//	Edge tmp3(4, 5, 9, nullptr, nullptr);
-//	Edge tmp4(3, 2, 0, nullptr, nullptr);
-//	v.push_back(tmp1);
-//	v.push_back(tmp2);
-//	v.push_back(tmp3);
-//	v.push_back(tmp4);
-//
-//	quickSort(v, 0, 3);
-//
-//}
+MST Kruskal(Graph& g);
+MST Prim(Graph& G);
+void printErrorMessage(ofstream& file);
+void processLine(ofstream& outputFile, ifstream& inputFile, vector<int>& fileParameters,int numOfParameters);
+void printInfoToScreenAndFile(ofstream& outputFile, string output);
+
+
+void main(int argc, char* argv[]) {
+
+	ifstream inputFile;
+	ofstream outputFile;
+	string line;
+	Graph g;
+	vector <int> fileParameters;
+	outputFile.open(argv[2]);
+	inputFile.open(argv[1]);
+	if (!inputFile.is_open())
+		printErrorMessage(outputFile);
+
+	//get num of vertex
+	processLine(outputFile, inputFile, fileParameters, 1);
+	g.MakeEmptyGraph(fileParameters[0]);
+	fileParameters.clear();
+
+
+	//get num of edges
+	processLine(outputFile, inputFile, fileParameters, 1);
+	int m = fileParameters[0];
+	fileParameters.clear();
+
+	// get edges
+	for (int i = 0; i < m; ++i) {
+		processLine(outputFile, inputFile, fileParameters, 3);
+
+		if (fileParameters[0] <1 || fileParameters[0] > g.getGraphSize())
+			printErrorMessage(outputFile);
+	
+		if (fileParameters[1] <1 || fileParameters[1] > g.getGraphSize())
+			printErrorMessage(outputFile);
+
+		g.AddEdge(fileParameters[0], fileParameters[1], fileParameters[2]);
+
+		fileParameters.clear();
+	}
+
+	//get edge to remove
+	processLine(outputFile, inputFile, fileParameters, 2);
+	if (fileParameters[0] <1 || fileParameters[0] > g.getGraphSize())
+			printErrorMessage(outputFile);
+
+	inputFile.close();
+
+	if (fileParameters[1] <1 || fileParameters[1] > g.getGraphSize())
+			printErrorMessage(outputFile);
+
+
+	// if g isn't connective - invalid input
+	if (!isConnective(g))
+		printErrorMessage(outputFile);
+	
+	MST tmp1 = Kruskal(g);
+	printInfoToScreenAndFile(outputFile, "Kruskal " + to_string(tmp1.getWeight()));
+
+	MST tmp2 = Prim(g);
+	printInfoToScreenAndFile(outputFile, "Prim " + to_string(tmp2.getWeight()));
+	try {
+		g.RemoveEdge(fileParameters[0], fileParameters[1]);
+	}
+	catch (...) {
+		printErrorMessage(outputFile);
+	}
+	
+
+	if (isConnective(g)) {
+		if (tmp1.isEdgeInMst(fileParameters[0], fileParameters[1])) {
+			MST tmp3 = Kruskal(g);
+			printInfoToScreenAndFile(outputFile, "Kruskal " + to_string(tmp3.getWeight()));
+		}
+		else
+			printInfoToScreenAndFile(outputFile, "Kruskal " + to_string(tmp1.getWeight()));
+	}
+	else
+		printInfoToScreenAndFile(outputFile, "no MST");
+
+	outputFile.close();
+}
+
+void processLine(ofstream& outputFile, ifstream& inputFile, vector<int>& fileParameters,int numOfParameters){
+
+	string line;
+	try {
+		getline(inputFile, line);
+	}
+	catch (...){
+		printErrorMessage(outputFile);
+	}
+	// exception
+	istringstream iss(line);
+	string token;
+	int i = 0, j = 0;
+	while (getline(iss, token, ' '))
+	{
+		for (int i = 0; i < token.size(); i++) {
+			if (j == 2) {
+				if (i == 0) {
+					if (!isdigit(token[0]) && token[0]!= '-')
+						printErrorMessage(outputFile);
+				}
+				else {
+					if (!isdigit(token[i]))
+						printErrorMessage(outputFile);
+				}
+			}
+			else {
+				if (!isdigit(token[i]))
+					printErrorMessage(outputFile);
+			}
+		}
+		fileParameters.push_back(stoi(token));
+		j++;
+	}
+	if (fileParameters.size() != numOfParameters) {
+		printErrorMessage(outputFile);
+	}
+}
+
 MST Kruskal(Graph& g) {
 	MST F;
 	DisjointSets UF(g.getGraphSize());
@@ -102,92 +213,14 @@ MST Prim(Graph& G) {
 	return T;
 }
 
-void main(int argc, char* argv[]) {
-	ifstream myfile;
-	myfile.open(argv[1]);
-
-	string line;
-	getline(myfile, line);
-	Graph g;
-	g.MakeEmptyGraph(stoi(line)); //possible error, line is not a valid number!
-	getline(myfile, line);
-	int m = stoi(line);
-	/*char* edge = nullptr;*/
-	for (int i = 0; i < m; ++i)
-	{
-		//check if there are excatly m edges in file
-		getline(myfile, line);
-		istringstream iss(line);
-		string token;
-		vector <int> v;
-		while (getline(iss, token, ' '))
-		{
-			v.push_back(stoi(token));
-		}
-		if (v.size() != 3) {
-			cout << "Invalid input!";
-			exit(1);
-		}
-		if (v[0] <1 || v[0] > g.getGraphSize())
-		{
-			cout << "Invalid input!";
-			exit(1);
-		}
-		if (v[1] <1 || v[1] > g.getGraphSize())
-		{
-			cout << "Invalid input!";
-			exit(1);
-		}
-		g.AddEdge(v[0], v[1], v[2]);
-		v.clear();
-	}
-
-	// if g isn't connective - invalid input
-
-	MST tmp1 = Kruskal(g);
-	cout << "Kruskal " << tmp1.getWeight() << endl;
-
-	MST tmp2 = Prim(g);
-	cout << "Prim " << tmp2.getWeight() << endl;
-
-	getline(myfile, line);
-	istringstream iss(line);
-	string token;
-	vector <int> v;
-	while (getline(iss, token, ' '))
-	{
-		v.push_back(stoi(token));
-	}
-	if (v.size() != 2) {
-		cout << "Invalid input!";
-		exit(1);
-	}
-	if (v[0] <1 || v[0] > g.getGraphSize())
-	{
-		cout << "Invalid input!";
-		exit(1);
-	}
-	if (v[1] <1 || v[1] > g.getGraphSize())
-	{
-		cout << "Invalid input!";
-		exit(1);
-	}
-
-	myfile.close();
-
-	g.RemoveEdge(v[0], v[1]);
-
-	// I noticed that if we remove an edge that doesn't exists in the graph there's no error - we need to throw exception later.
-
-	if (isConnective(g)) {
-		MST tmp3 = Kruskal(g);
-		cout << "Kruskal2 " << tmp3.getWeight() << endl;
-	}
-	else
-		cout << "The given Edge is a bridge. no MST exists" << endl;
-
-
+void printErrorMessage(ofstream& file) {
+	cout << "Invalid Input!";
+	file << "Invalid Input!";
+	file.close();
+	exit(1);
 }
 
-
-
+void printInfoToScreenAndFile(ofstream& outputFile, string output) {
+	cout << output << endl;
+	outputFile << output << endl;
+}

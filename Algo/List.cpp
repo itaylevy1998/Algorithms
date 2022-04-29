@@ -98,6 +98,9 @@ void List::findEdgeAndRemoveIt(int v)
 		}
 		curr = curr->getNext();
 	}
+	throw(1);
+	/*std::cout << "Invalid Input!";
+	exit(1);*/
 	//if we got here that means the edge doesn't exist in the graph
 	
 }

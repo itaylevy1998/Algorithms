@@ -43,6 +43,12 @@ void Graph::AddEdge(int u, int v, int c)
 
 void Graph::RemoveEdge(int u, int v)
 {
+	if (u < 1 || u > getGraphSize()) {
+		throw(1);
+		/*cout << "Invalid Input!";
+		exit(1);*/
+	}
+	
 	graph.at(u).findEdgeAndRemoveIt(v);
 	graph.at(v).findEdgeAndRemoveIt(u);
 	deleteEdgeFromList(u, v);

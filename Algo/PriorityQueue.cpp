@@ -72,20 +72,12 @@ int PriorityQueue::Right(int pair)
 Pair PriorityQueue::DeleteMin()
 {
 	int heapsize = heap.size();
-
-	///* */if (heapsize < 1)
-	//{
-	//	return nullptr;
-	//}
-	
-	
-		Pair min = heap[0];
-		heap[0] = heap[heapsize - 1];
-		indices[heap[heapsize - 1].data] = 0;
-		heap.resize(heapsize - 1);
-		FixHeapDown(0);
-		return min;
-	
+	Pair min = heap[0];
+	heap[0] = heap[heapsize - 1];
+	indices[heap[heapsize - 1].data] = 0;
+	heap.resize(heapsize - 1);
+	FixHeapDown(0);
+	return min;
 }
 
 // Fixheap: if the parent priority is greater than it's child poriority, it'll swap them. It'll stop when we get to the root.

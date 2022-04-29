@@ -101,6 +101,7 @@ void main(int argc, char* argv[]) {
 	outputFile.close();
 }
 
+//read line from file, and returns a vector of integers as they appear in next file line.
 void processLine(ofstream& outputFile, ifstream& inputFile, vector<int>& fileParameters,int numOfParameters){
 
 	string line;

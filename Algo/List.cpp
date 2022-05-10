@@ -1,5 +1,6 @@
 #include "List.h"
 
+//constructor
 List::List(int vertex)
 {
 	this->head = nullptr;
@@ -7,7 +8,7 @@ List::List(int vertex)
 	this->size = 0;
 	this->u = vertex;
 }
-
+//destructor
 List::~List()
 {
 	Edge* curr = head, *next;
@@ -22,12 +23,12 @@ Edge* List::getHead()
 {
 	return head;
 }
-
+//checks if the list is empty. returns true if it is.
 bool List::isEmpty()
 {
 	return (head == nullptr);
 }
-
+// creates a node and insert it to the end of the list.
 void List::insertToEnd(int u,int vertex, int weight)
 {
 	Edge* newEdge = new Edge(u,vertex, weight, nullptr, tail);
@@ -40,7 +41,7 @@ void List::insertToEnd(int u,int vertex, int weight)
 	}
 	size++;
 }
-
+// creates a node and insert it to the start of the list.
 void List::insertToStart(int u, int vertex, int weight) {
 	Edge* newEdge = new Edge(u, vertex, weight, head, nullptr);
 	if (isEmpty())
@@ -53,7 +54,7 @@ void List::insertToStart(int u, int vertex, int weight) {
 	size++;
 }
 
-
+// removes a given edge from the list.
 void List::removeEdge(Edge* toRemove)
 {
 	if (isEmpty())
@@ -76,7 +77,7 @@ void List::removeEdge(Edge* toRemove)
 	delete(toRemove);
 	size--;
 }
-
+// finding an egde in the list using it's value. returns true if the edge exists.
 bool List::findEdge(int v)
 {
 	Edge* curr = head;
@@ -87,7 +88,7 @@ bool List::findEdge(int v)
 	}
 	return false;
 }
-
+// finding an egde in the list using it's value. returns true if the edge exists.
 void List::findEdgeAndRemoveIt(int v)
 {
 	Edge* curr = head;

@@ -18,7 +18,7 @@ List::~List()
 		curr = next;
 	}
 }
-
+// returns the head of the list.
 Edge* List::getHead()
 {
 	return head;

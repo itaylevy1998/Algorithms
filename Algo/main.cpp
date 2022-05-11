@@ -54,6 +54,9 @@ void main(int argc, char* argv[]) {
 		if (fileParameters[1] <1 || fileParameters[1] > g.getGraphSize())
 			printErrorMessage(outputFile);
 
+		if (g.IsAdjacent(fileParameters[0], fileParameters[1]))
+			printErrorMessage(outputFile);
+
 		g.AddEdge(fileParameters[0], fileParameters[1], fileParameters[2]);
 
 		fileParameters.clear();
@@ -64,16 +67,19 @@ void main(int argc, char* argv[]) {
 	if (fileParameters[0] <1 || fileParameters[0] > g.getGraphSize())
 			printErrorMessage(outputFile);
 
-	inputFile.close();
-
 	if (fileParameters[1] <1 || fileParameters[1] > g.getGraphSize())
 			printErrorMessage(outputFile);
 
+	inputFile.close();
 
-	// if g isn't connective - invalid input
-	if (!isConnective(g))
-		printErrorMessage(outputFile);
-	
+	// if g isn't connective - print no mst
+	if (!isConnective(g)) {
+		printInfoToScreenAndFile(outputFile, "no MST");
+		inputFile.close();
+		outputFile.close();
+		exit(1);
+	}
+
 	MST tmp1 = Kruskal(g);
 	printInfoToScreenAndFile(outputFile, "Kruskal " + to_string(tmp1.getWeight()));
 
